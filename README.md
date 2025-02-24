@@ -25,4 +25,4 @@ This project ensures **safe environment separation** for Hasura deployments usin
 ### 1️⃣ Clone the repository  
 ```sh
 git clone https://github.com/omar-xy/hasura-monitoring.git
-cd hasura-env-guard
+cd hasura-monitoring
