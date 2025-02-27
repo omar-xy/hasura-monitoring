@@ -16,24 +16,6 @@ This project ensures **safe environment separation** for Hasura deployments usin
 ✅ **CI/CD Integration** – Automate deployments with **GitHub Actions**.  
 ✅ **Monitoring with Prometheus** – Track and alert on critical events.  
 
-
-
-## Project Structure
-
-hasura-monitoring/
-├── docker-compose.dev.yml    # Development/Staging
-├── docker-compose.prod.yml   # Production
-├── .github/
-│   └── workflows/
-│       ├── deploy-dev.yml    # dev
-│       └── deploy-prod.yml   # prod
-├── src/
-│   └── init.sql              # database schema
-├── .env.template             # Template env
-├── README.md                 # Project docs
-└── .gitignore                # Ignore .env
-
-
 ## Prerequisites
 
 - Docker and Docker Compose installed
