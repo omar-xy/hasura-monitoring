@@ -58,11 +58,18 @@ HASURA_ADMIN_SECRET_PROD=
 
 ---> Access Hasura at http://localhost:8081 (admin secret: your_prod_secret).
 
+## Run the Monitoring Stack:
+
+    ```bash
+    docker-compose -f docker-compose.monitoring.yml up -d
+    ```
 
 - **Solution Details**
 
 - Problem: Identical Hasura Console UIs for dev/staging and prod risk accidental production changes.
 
 - Fix: Set Hasura Admin Secret in respective environments.
+
+- Monitoring: Tracks query duration/errors, alerts via Discord for critical events.
 
 

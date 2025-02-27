@@ -1,9 +1,29 @@
-route:
-  receiver: 'slack-notifications'
-
 receivers:
-  - name: 'slack-notifications'
-    slack_configs:
-      - api_url: 'https://hooks.slack.com/your-slack-webhook-url'
-        channel: '#alerts'
-        send_resolved: true
+  - name: 'discord-notifications'
+    http_configs:
+      - url: 'https://discord.com/api/webhooks/1344736704677806142/7h9vl8dLo4-vLjyKle6W1GKZXrBOZVLZi3IVuAnixK7JPpjuDPoLei8hyy5pk1YA338z'
+        method: POST
+        body: |-
+          {
+            "content": "{{ .CommonAnnotations.summary }}",
+            "embeds": [
+              {
+                "title": "{{ .CommonLabels.severity }}: {{ .GroupLabels.job }}",
+                "description": "{{ .CommonAnnotations.description }}",
+                "fields": [
+                  {
+                    "name": "Alert Name",
+                    "value": "{{ .AlertName }}"
+                  },
+                  {
+                    "name": "Start Time",
+                    "value": "{{ .StartsAt }}"
+                  },
+                  {
+                    "name": "End Time",
+                    "value": "{{ .EndsAt }}"
+                  }
+                ]
+              }
+            ]
+          }
