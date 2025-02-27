@@ -5,22 +5,10 @@ This project ensures **safe environment separation** for Hasura deployments usin
 
 - **Environment-specific configurations** to prevent accidental production changes.  
 - **Challenge**: Prevent accidental changes to the production Hasura instance by differentiating it from dev/staging.
-- **Solution**: Deployed via separate Docker Compose files and GitHub Actions workflows.
-- **Tech Stack**: Hasura GraphQL Engine, PostgreSQL, Docker Compose, GitHub Actions.
-- **CI/CD pipelines** for controlled deployments.  
+- **Solution**: Deployed via separate Docker Compose files and different environments
+- **Tech Stack**: Hasura GraphQL Engine, PostgreSQL, Docker Compose 
 - **Monitoring with Prometheus** to track critical actions.
 
-## 🔥 Features  
-✅ **Environment Flags** – Differentiate `development`, and `production`.  
-✅ **Stricter Access Control** – Prevent unsafe actions in production.  
-✅ **CI/CD Integration** – Automate deployments with **GitHub Actions**.  
-✅ **Monitoring with Prometheus** – Track and alert on critical events.  
-
-## Prerequisites
-
-- Docker and Docker Compose installed
-- GitHub account for CI/CD
-- Basic familiarity with Hasura and PostgreSQL
 
 ## Setup Instructions
 
@@ -77,4 +65,4 @@ HASURA_ADMIN_SECRET_PROD=
 
 - Fix: Set Hasura Admin Secret in respective environments.
 
-- CI/CD: Separate GitHub Actions workflows (deploy-dev.yml, deploy-prod.yml) simulate deployment isolation.
+

@@ -1,0 +1,31 @@
+groups:
+  - name: HasuraDevAlerts
+    rules:
+      - alert: HighQueryDurationDev
+        expr: sum(increase(hasura_query_duration_seconds_sum{job="hasura-dev"}[5m])) / sum(increase(hasura_query_duration_seconds_count{job="hasura-dev"}[5m])) > 1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High query duration in Hasura Development Environment"
+          description: "The average query duration over the last 5 minutes is greater than 1 second in the development environment."
+
+  - name: HasuraProdAlerts
+    rules:
+      - alert: HighQueryDurationProd
+        expr: sum(increase(hasura_query_duration_seconds_sum{job="hasura-prod"}[5m])) / sum(increase(hasura_query_duration_seconds_count{job="hasura-prod"}[5m])) > 0.5
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High query duration in Hasura Production Environment"
+          description: "The average query duration over the last 5 minutes is greater than 0.5 seconds in the production environment."
+
+      - alert: HighFailedQueriesProd
+        expr: increase(hasura_query_errors_total{job="hasura-prod"}[5m]) > 5
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High number of failed queries in Hasura Production Environment"
+          description: "More than 5 queries failed in the last 5 minutes in the production environment."
