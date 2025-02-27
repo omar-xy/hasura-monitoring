@@ -4,7 +4,7 @@ services:
     image: postgres:15
     restart: always
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db_data_dev:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
