@@ -57,7 +57,7 @@ HASURA_ADMIN_SECRET_PROD=
 ## Run Development Environment:
 
     ```bash
-    docker-compose -f docker-compose.dev.yml up -d --env-file .env
+    docker-compose -f docker-compose.dev.yml up -d
     ```
 
 ---> Access Hasura at http://localhost:8080 (admin secret: your_dev_secret).
@@ -65,7 +65,7 @@ HASURA_ADMIN_SECRET_PROD=
 ## Run Production Environment:
 
     ```bash
-    docker-compose -f docker-compose.prod.yml up -d --env-file .env
+    docker-compose -f docker-compose.prod.yml up -d
     ```
 
 ---> Access Hasura at http://localhost:8081 (admin secret: your_prod_secret).
