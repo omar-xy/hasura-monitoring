@@ -4,7 +4,7 @@
 This project ensures **safe environment separation** for Hasura deployments using:
 
 - **Environment-specific configurations** to prevent accidental production changes.  
-- **Challenge**: Prevent accidental changes to the production Hasura instance by differentiating it from dev/staging in the console UI.
+- **Challenge**: Prevent accidental changes to the production Hasura instance by differentiating it from dev/staging.
 - **Solution**: Deployed via separate Docker Compose files and GitHub Actions workflows.
 - **Tech Stack**: Hasura GraphQL Engine, PostgreSQL, Docker Compose, GitHub Actions.
 - **CI/CD pipelines** for controlled deployments.  
@@ -21,17 +21,17 @@ This project ensures **safe environment separation** for Hasura deployments usin
 ## Project Structure
 
 hasura-monitoring/
-├── docker-compose.dev.yml    # Development/Staging environment config
-├── docker-compose.prod.yml   # Production environment config
+├── docker-compose.dev.yml
+├── docker-compose.prod.yml
 ├── .github/
 │   └── workflows/
-│       ├── deploy-dev.yml    # CI/CD for dev
-│       └── deploy-prod.yml   # CI/CD for prod
+│       ├── deploy-dev.yml
+│       └── deploy-prod.yml
 ├── src/
-│   └── init.sql              # Mock database schema
-├── .env.template             # Template for environment variables
-├── README.md                 # Project documentation
-└── .gitignore                # Git ignore file
+│   └── init.sql
+├── .env.template
+├── README.md
+└── .gitignore
 
 
 ## Prerequisites
