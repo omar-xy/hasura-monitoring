@@ -21,17 +21,17 @@ This project ensures **safe environment separation** for Hasura deployments usin
 ## Project Structure
 
 hasura-monitoring/
-├── docker-compose.dev.yml
-├── docker-compose.prod.yml
+├── docker-compose.dev.yml    # Development/Staging
+├── docker-compose.prod.yml   # Production
 ├── .github/
 │   └── workflows/
-│       ├── deploy-dev.yml
-│       └── deploy-prod.yml
+│       ├── deploy-dev.yml    # dev
+│       └── deploy-prod.yml   # prod
 ├── src/
-│   └── init.sql
-├── .env.template
-├── README.md
-└── .gitignore
+│   └── init.sql              # database schema
+├── .env.template             # Template env
+├── README.md                 # Project docs
+└── .gitignore                # Ignore .env
 
 
 ## Prerequisites
