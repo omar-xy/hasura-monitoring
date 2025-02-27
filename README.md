@@ -5,7 +5,7 @@ This project ensures **safe environment separation** for Hasura deployments usin
 
 - **Environment-specific configurations** to prevent accidental production changes.  
 - **Challenge**: Prevent accidental changes to the production Hasura instance by differentiating it from dev/staging.
-- **Solution**: Deployed via separate Docker Compose files and different environments
+- **Solution**: Deployed via separate Docker Compose files and different environments, including secretkey for each one.
 - **Tech Stack**: Hasura GraphQL Engine, PostgreSQL, Docker Compose 
 - **Monitoring with Prometheus** to track critical actions.
 
