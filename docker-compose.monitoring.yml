@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   postgres-dev:
@@ -52,23 +51,42 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./alert_rules.yml:/etc/prometheus/alert_rules.yml
+      - ./services/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/alert_rules.yml:/etc/prometheus/alert_rules.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--web.enable-lifecycle'
+    depends_on:
+      - hasura-dev
+      - hasura-prod
 
-  alertmanager:
+  alert-manager:
+    container_name: alert-manager
     image: prom/alertmanager:v0.25.0
     ports:
       - "9093:9093"
     volumes:
-      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - ./config/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - alert-manager-data:/alertmanager
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--storage.path=/alertmanager'
+    depends_on:
+      - prometheus
+
+  discord-alerts:
+    container_name: discord-alerts
+    image: benjojo/alertmanager-discord:latest
+    environment:
+      DISCORD_WEBHOOK: ${DISCORD_WEBHOOK_URL}
+    depends_on:
+      - alert-manager
+    restart: always
+    ports:
+      - "9087:9087"
 
 volumes:
   db_data_dev:
   db_data_prod:
+  alert-manager-data:
