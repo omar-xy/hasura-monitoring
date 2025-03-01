@@ -1,21 +1,32 @@
 global:
   scrape_interval: 15s
-
-scrape_configs:
-  - job_name: 'hasura-dev'
-    static_configs:
-      - targets: ['localhost:8080']
-    metrics_path: '/prometheus/metrics'
-
-  - job_name: 'hasura-prod'
-    static_configs:
-      - targets: ['localhost:8081']
-    metrics_path: '/prometheus/metrics'
+  evaluation_interval: 15s
 
 alerting:
   alertmanagers:
     - static_configs:
-      - targets: ['localhost:9093']
+        - targets: ['alert-manager:9093']
 
 rule_files:
   - '/etc/prometheus/alert_rules.yml'
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'hasura-dev'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['hasura-dev:8080']
+    # authorization:
+    #   type: Bearer
+    #   credentials: "{{ env `HASURA_METRICS_SECRET_DEV` }}"
+
+  - job_name: 'hasura-prod'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['hasura-prod:8080']
+    # authorization:
+    #   type: Bearer
+    #   credentials: "{{ env `HASURA_METRICS_SECRET_PROD` }}"

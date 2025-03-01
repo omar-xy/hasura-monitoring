@@ -11,12 +11,13 @@ services:
       - "5432:5432"
 
   hasura-dev:
-    image: hasura/graphql-engine:v2.42.0
+    image: hasura/graphql-engine:v2.43.0
     ports:
       - "8080:8080"
     restart: always
     environment:
-      HASURA_GRAPHQL_PROMETHEUS_ENABLE: "true"
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: "true"
+      HASURA_GRAPHQL_ENABLED_APIS: "metadata,graphql,config,metrics"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_ADMIN_SECRET_DEV}
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres-dev:5432/postgres
@@ -34,12 +35,13 @@ services:
       - "5433:5432"
 
   hasura-prod:
-    image: hasura/graphql-engine:v2.42.0
+    image: hasura/graphql-engine:v2.43.0
     ports:
       - "8081:8080"
     restart: always
     environment:
-      HASURA_GRAPHQL_PROMETHEUS_ENABLE: "true"
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: "true"
+      HASURA_GRAPHQL_ENABLED_APIS: "metadata,graphql,config,metrics"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_ADMIN_SECRET_PROD}
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres-prod:5432/postgres
@@ -57,6 +59,9 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--web.enable-lifecycle'
+    environment:
+      HASURA_METRICS_SECRET_DEV: ${HASURA_METRICS_SECRET_DEV}
+      HASURA_METRICS_SECRET_PROD: ${HASURA_METRICS_SECRET_PROD}
     depends_on:
       - hasura-dev
       - hasura-prod
